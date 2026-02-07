@@ -2,6 +2,7 @@ package com.simon.sreader
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
@@ -86,6 +87,9 @@ private fun ReaderScreenWithPanels(
     val viewModel: ReaderViewModel = viewModel()
     val uiState by viewModel.uiState.collectAsState()
     val settings by viewModel.settings.collectAsState()
+
+    // 拦截系统返回手势，返回首页而不是关闭应用
+    BackHandler(onBack = onBack)
 
     // 面板显示状态
     var showSearch by remember { mutableStateOf(false) }
